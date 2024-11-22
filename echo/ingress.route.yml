@@ -1,0 +1,44 @@
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: echo-ingress
+#spec:
+#  #tls:
+#  # - hosts:
+#  #   - echo.local.antoniocaccamo.work
+#  #   secretName: self-signed-tls
+#  rules:
+#    - host: k3s.local.antoniocaccamo.work
+#      http:
+#        paths:
+#          - path: /echo
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: echo
+#                port:
+#                  name: http
+
+
+
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: echo
+spec:
+  entryPoints:
+    - web
+    - websecure
+
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/echo`)
+      middlewares:                    # [5]
+        # - name: redirect-to-http      # [6]
+        #   namespace: traefik 
+      services:
+        - kind: Service
+          name: echo
+          port: 80
+#  tls:
+#   secretName: tls-private.antoniocaccamo.work-secret

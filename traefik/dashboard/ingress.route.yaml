@@ -4,10 +4,11 @@ metadata:
   name: dashboard
   namespace: traefik
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
 spec:
   entryPoints:
   - web
+  - websecure
   routes:
   - match: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
     kind: Rule
@@ -18,4 +19,4 @@ spec:
     options:
       name: opt
       namespace: default
-    secretName: tls-secret
+    secretName: tls-private.antoniocaccamo.work-secret

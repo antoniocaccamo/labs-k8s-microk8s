@@ -35,18 +35,21 @@ kubectl apply -f metal-lb
 kubectl create namespace traefik
 helm repo add traefik https://helm.traefik.io/traefik
 helm update
-#helm show values traefik/traefik > traefik/values.yaml
+# helm show values traefik/traefik > traefik/values.yaml
 helm install traefik traefik/traefik -n traefik \
-    --values traefil/vaules.yaml \
+    --values traefik/vaules.yaml                \
     --create-namespace
+
+helm upgrade traefik traefik/traefik -n traefik \
+    --values traefik/vaules.yaml
 ----
 
 == import certs
 [source, bash]
 ----
-kubectl create secret tls tls-${domain}-secret \
+kubectl create secret tls tls-${domain}-secret        \
     --cert=../certificates/${domain}/fullchain.pem    \
-    --key =..certificates/${domain}/privkey.pem
+     --key=..certificates/${domain}/privkey.pem
 ----
 
 
@@ -62,7 +65,7 @@ kubectl apply -f echo
 * https://medium.com/@kalyanishah86/setting-up-metallb-traefik-ingress-and-longhorn-storage-for-on-premises-kubernetes-c7f39750f243
 * https://traefik.io/blog/from-zero-to-hero-getting-started-with-k0s-and-traefik/
 
-
+* https://medium.com/@nicdesousa/quick-start-kubernetes-dashboard-on-rancher-k3s-51a530bac44
 * https://www.virtualizationhowto.com/2022/12/microk8s-ingress-controller-configuration-with-traefik/
 * https://pacroy.com/single-node-kubernetes-on-home-lab-using-microk8s-metallb-and-traefik-7bb1ea38fcc2[Single-node Kubernetes on Home Lab using MicroK8s, Metallb, and Traefik]
 * https://www.robert-jensen.dk/posts/2021-microk8s-with-traefik-and-metallb/[Installing Microk8s With Traefik and Metallb]
