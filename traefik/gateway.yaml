@@ -1,0 +1,32 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+# metadata:
+#   name: traefik
+#   namespace: traefik
+# spec:
+#   gatewayClassName: traefik
+
+#   # Only Routes from the same namespace are allowed.
+#   listeners:
+#     - name: web
+#       protocol: HTTP
+#       port: 80         # PORT DEFAULT TRAEFIK BUAT HTTP
+#       hostname: "*.apps.slc.net"      # Domain Name Wildcard
+#       allowedRoutes:
+#         namespaces:
+#           from: All #| Same
+
+#     - name: websecure
+#       protocol: HTTPS
+#       port: 443         # PORT DEFAULT TRAEFIK BUAT HTTPS
+#       hostname: "*.apps.slc.net"      # Domain Name Wildcard
+#       tls:
+#         mode: Terminate
+#         certificateRefs:
+#           - name: traefik-tls-secret
+#             namespace: default
+
+#       allowedRoutes:
+#         namespaces:
+#           from: All #| Same

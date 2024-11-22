@@ -1,0 +1,21 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: whoami
+spec:
+  entryPoints:
+    - web
+    - websecure
+
+  routes:
+    - kind: Rule
+      match: PathPrefix(`/whoami`)
+      # middlewares:                    # [5]
+      #   - name: redirect-to-http      # [6]
+      #     namespace: traefik 
+      services:
+        - kind: Service
+          name: whoami
+          port: 80
+  tls:
+    secretName: tls-secret
